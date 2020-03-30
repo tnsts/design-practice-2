@@ -8,7 +8,12 @@ go_binary {
   testPkg: "github.com/tnsts/design-practice-2/build/cmd/bood/tests",
 
   // Build inputs.
-  srcs: ["**/*.go", "../go.mod"],
+  srcs: ["**/*[^test].go", "../go.mod"],
+
+  // Test inputs.
+  testSrcs: ["**/*test.go"],
 
   vendorFirst: false,
+
+  srcsExclude: ["vendor/**/*"]
 }
