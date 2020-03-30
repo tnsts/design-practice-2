@@ -17,7 +17,7 @@ rule g.gomodule.binaryBuild
     description = build go command ${pkg}
 
 rule g.gomodule.test
-    command = cd ${workDir} && go test -v ${pkg} > ${out}
+    command = cd ${workDir} && go test -v ${pkg} > ${outputPath}
     description = test ${pkg}
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -28,7 +28,8 @@ rule g.gomodule.test
 # Defined: build.bood:1:1
 
 build out/bin/bood_rebase: g.gomodule.binaryBuild | cmd/bood/main.go $
-        cmd/bood/tests/main_test.go gomodule/tested-binary.go ../go.mod
+        cmd/bood/tests/main_test.go gomodule/doc.go gomodule/tested-binary.go $
+        ../go.mod
     description = Build bood_rebase as Go binary
     outputPath = out/bin/bood_rebase
     pkg = github.com/tnsts/design-practice-2/build/cmd/bood
@@ -36,7 +37,8 @@ build out/bin/bood_rebase: g.gomodule.binaryBuild | cmd/bood/main.go $
 default out/bin/bood_rebase
 
 build out/test-results/test-res.txt: g.gomodule.test | cmd/bood/main.go $
-        cmd/bood/tests/main_test.go gomodule/tested-binary.go ../go.mod
+        cmd/bood/tests/main_test.go gomodule/doc.go gomodule/tested-binary.go $
+        ../go.mod
     description = bood_rebase tests to Go binary
     outputPath = out/test-results/test-res.txt
     pkg = github.com/tnsts/design-practice-2/build/cmd/bood/tests
