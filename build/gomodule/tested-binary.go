@@ -24,21 +24,25 @@ var (
 	}, "workDir", "name")
 
 	goTest = pctx.StaticRule("test", blueprint.RuleParams{
-		Command:     "cd ${workDir} && go test -v ${pkg} > ${out}",
+		Command:     "cd ${workDir} && go test -v ${pkg} > ${outputPath}",
 		Description: "test ${pkg}",
 	}, "workDir", "outputPath", "pkg")
+
+
 )
 
 type testedBinaryModule struct {
 	blueprint.SimpleName
 
 	properties struct {
-		//Name string
+		Name string
 		Pkg string
+		TestPkg string
 		Srcs []string
 		SrcsExclude []string
 		VendorFirst bool
-		TestPkg string
+		TestSrcs []string
+		TestSrcsExclude []string
 	}
 }
 
@@ -63,6 +67,20 @@ func (tb *testedBinaryModule) GenerateBuildActions(ctx blueprint.ModuleContext) 
 		if inputErors {
 			return
 		}
+
+		var testInputs []string
+		for _, src := range tb.properties.TestSrcs {
+			if matches, err := ctx.GlobWithDeps(src, tb.properties.TestSrcsExclude); err == nil {
+				 testInputs = append( testInputs, matches...)
+			} else {
+				ctx.PropertyErrorf("testSrcs", "Cannot resolve files that match pattern %s", src)
+				inputErors = true
+			}
+		}
+		if inputErors {
+			return
+		}
+		testInputs = append( testInputs, inputs...)
 
 		if tb.properties.VendorFirst {
 			vendorDirPath := path.Join(ctx.ModuleDir(), "vendor")
@@ -92,17 +110,17 @@ func (tb *testedBinaryModule) GenerateBuildActions(ctx blueprint.ModuleContext) 
 			},
 		})
 
-		if len(tb.properties.TestPkg) > 0 {
-				ctx.Build(pctx, blueprint.BuildParams{
-					Description: fmt.Sprintf("%s tests to Go binary", name),
-					Rule:        goTest,
-					Outputs:     []string{testOutputPath},
-					Implicits:   inputs,
-					Args: map[string]string{
-						"outputPath": testOutputPath,
-						"workDir":    ctx.ModuleDir(),
-						"pkg":        tb.properties.TestPkg,
-					},
+	  if len(tb.properties.TestPkg) > 0 {
+			ctx.Build(pctx, blueprint.BuildParams{
+				Description: fmt.Sprintf("%s tests to Go binary", name),
+	  		Rule:        goTest,
+				Outputs:     []string{testOutputPath},
+				Implicits:   testInputs,
+				Args: map[string]string{
+					"outputPath": testOutputPath,
+					"workDir":    ctx.ModuleDir(),
+					"pkg":        tb.properties.TestPkg,
+				},
 			})
 		}
 }
