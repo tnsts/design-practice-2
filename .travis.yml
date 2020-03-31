@@ -1,0 +1,12 @@
+language: go
+
+go: "1.14"
+
+install:
+  - . ./.install-ninja.sh
+  - . ./.install-bood_rebase.sh
+  - go get -u golang.org/x/tools/cmd/godoc
+
+script:
+  - cd $GOPATH/src/github.com/tnsts/design-practice-2/build
+  - bood_rebase
