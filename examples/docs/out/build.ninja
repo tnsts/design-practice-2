@@ -26,7 +26,7 @@ rule g.gomodule.docs
 build out/docs/my-docs.html: g.gomodule.docs | main.go tests/main_test.go
     description = Genaration of docs for bood_rebase package
     outputPath = out/docs/my-docs.html
-    pkg = github.com/tnsts/design-practice-2/build/cmd/bood
+    pkg = github.com/tnsts/design-practice-2/build/gomodule
     workDir = .
 default out/docs/my-docs.html
 

@@ -1,4 +1,4 @@
-use 'godoc cmd/github.com/tnsts/design-practice-2/build/cmd/bood' for documentation on the github.com/tnsts/design-practice-2/build/cmd/bood command 
+use 'godoc cmd/github.com/tnsts/design-practice-2/build/gomodule' for documentation on the github.com/tnsts/design-practice-2/build/gomodule command 
 
 <!--
 	Copyright 2009 The Go Authors. All rights reserved.
@@ -19,6 +19,132 @@ use 'godoc cmd/github.com/tnsts/design-practice-2/build/cmd/bood' for documentat
 
 	
 		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "github.com/tnsts/design-practice-2/build/gomodule"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				
+				
+			</div>
+		</div>
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+			
+			
+				
+				<dd><a href="#DocFactory">func DocFactory() (blueprint.Module, []interface{})</a></dd>
+			
+				
+				<dd><a href="#TestBinFactory">func TestBinFactory() (blueprint.Module, []interface{})</a></dd>
+			
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h3>Package files</h3>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="/src/github.com/tnsts/design-practice-2/build/gomodule/doc.go">doc.go</a>
+			
+				<a href="/src/github.com/tnsts/design-practice-2/build/gomodule/tested-binary.go">tested-binary.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		<div id="pkg-callgraph" class="toggle" style="display: none">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Internal Call Graph section">Internal call graph ▹</h2>
+		</div> <!-- .expanded -->
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Internal Call Graph section">Internal call graph ▾</h2>
+			<p>
+			  In the call graph viewer below, each node
+			  is a function belonging to this package
+			  and its children are the functions it
+			  calls&mdash;perhaps dynamically.
+			</p>
+			<p>
+			  The root nodes are the entry points of the
+			  package: functions that may be called from
+			  outside the package.
+			  There may be non-exported or anonymous
+			  functions among them if they are called
+			  dynamically from another package.
+			</p>
+			<p>
+			  Click a node to visit that function's source code.
+			  From there you can visit its callers by
+			  clicking its declaring <code>func</code>
+			  token.
+			</p>
+			<p>
+			  Functions may be omitted if they were
+			  determined to be unreachable in the
+			  particular programs or tests that were
+			  analyzed.
+			</p>
+			<!-- Zero means show all package entry points. -->
+			<ul style="margin-left: 0.5in" id="callgraph-0" class="treeview"></ul>
+		</div>
+		</div> <!-- #pkg-callgraph -->
+
+		
+		
+		
+			
+			
+			<h2 id="DocFactory">func <a href="/src/target/doc.go?s=1486:1537#L53">DocFactory</a>
+				<a class="permalink" href="#DocFactory">&#xb6;</a>
+			</h2>
+			<pre>func DocFactory() (<a href="/pkg/github.com/google/blueprint/">blueprint</a>.<a href="/pkg/github.com/google/blueprint/#Module">Module</a>, []interface{})</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="TestBinFactory">func <a href="/src/target/tested-binary.go?s=3532:3587#L118">TestBinFactory</a>
+				<a class="permalink" href="#TestBinFactory">&#xb6;</a>
+			</h2>
+			<pre>func TestBinFactory() (<a href="/pkg/github.com/google/blueprint/">blueprint</a>.<a href="/pkg/github.com/google/blueprint/#Module">Module</a>, []interface{})</pre>
+			
+			
+			
+
+		
 		
 	
 
@@ -27,53 +153,4 @@ use 'godoc cmd/github.com/tnsts/design-practice-2/build/cmd/bood' for documentat
 
 
 
-
-	
-	
-		<h2 id="pkg-subdirectories">Subdirectories</h2>
-	
-	
-
-
-	<div class="pkg-dir">
-		<table>
-			<tr>
-				<th class="pkg-name">Name</th>
-				<th class="pkg-synopsis">Synopsis</th>
-			</tr>
-
-			
-			<tr>
-				<td colspan="2"><a href="..">..</a></td>
-			</tr>
-			
-
-			
-				
-					<tr>
-						<td class="pkg-name" style="padding-left: 0px;">
-							<a href="out/">out</a>
-						</td>
-						<td class="pkg-synopsis">
-							
-						</td>
-					</tr>
-				
-			
-				
-					<tr>
-						<td class="pkg-name" style="padding-left: 0px;">
-							<a href="tests/">tests</a>
-						</td>
-						<td class="pkg-synopsis">
-							
-						</td>
-					</tr>
-				
-			
-		</table>
-	</div>
-
-
-	
 
