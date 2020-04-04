@@ -11,5 +11,5 @@ script:
   - cd $GOPATH/src/github.com/tnsts/design-practice-2/build
   - bood_rebase
   - cd ..
-  - cd ./ examples/binary/out/bin
+  - cd ./examples/binary/out/bin
   - bood_rebase
