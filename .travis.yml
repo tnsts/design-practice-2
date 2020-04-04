@@ -12,5 +12,5 @@ script:
   - bood_rebase
   - cd ../examples/binary
   - bood_rebase
-  - cd ../examples/docs
+  - cd ../docs
   - bood_rebase
