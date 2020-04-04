@@ -10,7 +10,7 @@ import (
 var (
 	// Ninja rule to execute godoc.
 	goDocs = pctx.StaticRule("docs", blueprint.RuleParams{
-		Command:     "cd $workDir && godoc -html $pkg > $outputPath",
+		Command:     "cd $workDir && godoc -url $pkg > $outputPath",
 		Description: "generate docs for $pkg",
 	}, "workDir", "outputPath", "pkg")
 )
