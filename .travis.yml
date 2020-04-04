@@ -14,4 +14,4 @@ script:
   - bood_rebase
   - cd ../examples/binary
   - bood_rebase
-  - cat ./out/test-results.txt
+  - cat ./out/test-results/test-res.txt
