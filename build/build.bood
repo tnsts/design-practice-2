@@ -5,8 +5,6 @@ go_binary {
   // Go package to build.
   pkg: "github.com/tnsts/design-practice-2/build/cmd/bood",
 
-  testPkg: "github.com/tnsts/design-practice-2/build/cmd/bood/tests",
-
   // Build inputs.
   srcs: ["**/*.go", "../go.mod"],
 
