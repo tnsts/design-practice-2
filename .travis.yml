@@ -11,8 +11,8 @@ script:
   - cd $GOPATH/src/github.com/tnsts/design-practice-2/build
   - bood_rebase
   - cd $GOPATH/src/github.com/tnsts/design-practice-2/examples/binary
-  - ./bood_rebase
+  - sudo ./out/bin/bood_rebase
   - cp ./out/bin/bood_rebase ../docs/
   - cd ../docs/
-  - ./bood_rebase
+  - sudo ./bood_rebase
   - cat ./out/test-results/test-res.txt
