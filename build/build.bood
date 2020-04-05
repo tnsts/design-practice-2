@@ -23,7 +23,7 @@ go_doc {
  binary: ["bood_rebase"],
 
  // Go package for docs generation.
- pkg: "github.com/tnsts/design-practice-2/build/gomodule",
+ pkg: "/src/github.com/tnsts/design-practice-2/build/gomodule",
 
  // Build inputs.
  srcs: ["**/*.go"]
