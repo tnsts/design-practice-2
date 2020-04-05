@@ -6,7 +6,6 @@ go: "1.14"
 
 install:
   - . ./.install-ninja.sh
-  - . ./.install-bood_rebase.sh
   - go get -u golang.org/x/tools/cmd/godoc
 
 script:
@@ -15,3 +14,4 @@ script:
   - cp bood_rebase ../../
   - cd ../../
   - ./bood_rebase
+  - cat ./out/test-results/test-res.txt
