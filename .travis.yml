@@ -10,7 +10,7 @@ install:
 script:
   - cd $GOPATH/src/github.com/tnsts/design-practice-2/build
   - bood_rebase
-  - rm $GOPATH/bin/bood_rebase
+  - sudo rm $GOPATH/bin/bood_rebase
   - sudo chmod +x ../examples/binary/out/bin/bood_rebase
   - mv ../examples/binary/out/bin/bood_rebase $GOPATH/bin
   - cd ../examples/docs
