@@ -12,7 +12,7 @@ script:
   - bood-linux
   - cd ../examples/binary/out/bin/
   - sudo chmod +x bood_rebase
-  - mv bood_rebase $GOPATH/bin
+  - mv bood_rebase $GOPATH/src/github.com/tnsts/design-practice-2/examples/docs
   - ls $GOPATH/bin
   - cd $GOPATH/src/github.com/tnsts/design-practice-2/examples/docs
   - ./bood_rebase
