@@ -1,3 +1,4 @@
+
 package gomodule
 
 import (
@@ -10,7 +11,7 @@ import (
 var (
 	// Ninja rule to execute godoc.
 	goDocs = pctx.StaticRule("docs", blueprint.RuleParams{
-		Command:     "cd $workDir && godoc -html $pkg > $outputPath",
+		Command:     "cd $workDir && godoc -url $pkg > $outputPath",
 		Description: "generate docs for $pkg",
 	}, "workDir", "outputPath", "pkg")
 )
@@ -20,10 +21,15 @@ type docModule struct {
 
 	properties struct {
 		Name string
+		Binary []string
 		Pkg string
 		Srcs []string
 		SrcsExclude []string
 	}
+}
+
+func (am *docModule) DynamicDependencies(blueprint.DynamicDependerModuleContext) []string {
+	return am.properties.Binary
 }
 
 func (tb *docModule) GenerateBuildActions(ctx blueprint.ModuleContext) {

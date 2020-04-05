@@ -1,3 +1,0 @@
-testing: warning: no tests to run
-PASS
-ok  	github.com/tnsts/design-practice-2/build/cmd/bood/tests	(cached) [no tests to run]
