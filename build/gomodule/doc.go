@@ -20,10 +20,15 @@ type docModule struct {
 
 	properties struct {
 		Name string
+		Binary []string
 		Pkg string
 		Srcs []string
 		SrcsExclude []string
 	}
+}
+
+func (am *docModule) DynamicDependencies(blueprint.DynamicDependerModuleContext) []string {
+	return am.properties.Binary
 }
 
 func (tb *docModule) GenerateBuildActions(ctx blueprint.ModuleContext) {
