@@ -15,7 +15,7 @@ script:
   - mv bood_rebase $GOPATH/bin
   - ls $GOPATH/bin
   - cd $GOPATH/src/github.com/tnsts/design-practice-2/examples/docs
-  - bood_rebase
+  - ./bood_rebase
   - cd ../binary
-  - bood_rebase
+  - ./bood_rebase
   - cat ./out/test-results/test-res.txt
