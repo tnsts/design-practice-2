@@ -1,3 +1,3 @@
-wget https://github.com/tnsts/design-practice-2/raw/master/examples/binary/out/bin/bood_rebase
-sudo chmod +x bood_rebase
-mv bood_rebase $GOPATH/bin
+wget https://github.com/roman-mazur/bood/releases/download/v0.0.5/bood-linux
+sudo chmod +x bood-linux
+mv bood-linux $GOPATH/bin
