@@ -1,3 +1,0 @@
-testing: warning: no tests to run
-PASS
-ok  	github.com/tnsts/design-practice-2/build/gomodule	0.002s [no tests to run]

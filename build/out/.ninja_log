@@ -1,2 +1,4 @@
 # ninja log v5
-0	1477	1586038855	out/bin/bood_rebase	f3e3c49cd6a3c4ee
+1	757	1586118849	out/test-results/test-res.txt	f2fc4cca45a78adb
+5	934	1586118850	out/docs/my-docs.html	70a426c3aed05057
+0	2080	1586118851	out/bin/bood_rebase	f3e3c49cd6a3c4ee
