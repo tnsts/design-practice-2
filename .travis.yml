@@ -9,7 +9,7 @@ install:
 
 script:
   - cd $GOPATH/src/github.com/tnsts/design-practice-2/build
-  - bood-linux
+  - bood_rebase
   - cd ../examples/docs
   - bood_rebase
   - cd ../binary
