@@ -13,6 +13,7 @@ script:
   - cd ../examples/binary/out/bin/
   - sudo chmod +x bood_rebase
   - mv bood_rebase $GOPATH/bin
+  - ls $GOPATH/bin
   - cd $GOPATH/src/github.com/tnsts/design-practice-2/examples/docs
   - bood_rebase
   - cd ../binary
