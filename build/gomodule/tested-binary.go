@@ -102,7 +102,7 @@ func (tb *testedBinaryModule) GenerateBuildActions(ctx blueprint.ModuleContext) 
 			inputs = append(inputs, vendorDirPath)
 		}
 
-		if(len(inputs) != 0) {
+		if (len(tb.properties.Pkg) > 0 && len(inputs) != 0) {
 			ctx.Build(pctx, blueprint.BuildParams{
 				Description: fmt.Sprintf("Build %s as Go binary", name),
 				Rule:        goBuild,
