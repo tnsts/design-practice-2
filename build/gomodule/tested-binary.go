@@ -24,11 +24,14 @@ var (
 	}, "workDir", "name")
 
 	goTest = pctx.StaticRule("test", blueprint.RuleParams{
-		Command:     "cd ${workDir} && mkdir -p out/test-results && go test -c -v -o ${outputBinPath} ${pkg}",
+		Command:     "cd ${workDir} && mkdir -p out/test-results && go test -v -o ${outputBinPath} ${pkg} > ${outputPath}",
 		Description: "test ${pkg}",
 	}, "workDir", "outputPath", "outputBinPath", "pkg")
 
-
+	goBinTest = pctx.StaticRule("testBinary", blueprint.RuleParams{
+		Command:     "cd ${workDir} && mkdir -p out/test-results && go test -c -v -o ${outputBinPath} ${pkg}",
+		Description: "test ${pkg}",
+	}, "workDir", "outputPath", "outputBinPath", "pkg")
 )
 
 type testedBinaryModule struct {
@@ -45,6 +48,7 @@ type testedBinaryModule struct {
 		TestSrcsExclude []string
 		TestsResFile string
 		TestsBinResFile string
+		NoTestExec bool
 	}
 }
 
@@ -124,18 +128,33 @@ func (tb *testedBinaryModule) GenerateBuildActions(ctx blueprint.ModuleContext) 
 		}
 
 	  if len(tb.properties.TestPkg) > 0 {
-			ctx.Build(pctx, blueprint.BuildParams{
-				Description: fmt.Sprintf("%s tests to Go binary", name),
-	  		Rule:        goTest,
-				Outputs:     []string{testOutputPath},
-				Implicits:   testInputs,
-				Args: map[string]string{
-					"outputPath": testOutputPath,
-					"outputBinPath": testOutputBinPath,
-					"workDir":    ctx.ModuleDir(),
-					"pkg":        tb.properties.TestPkg,
-				},
-			})
+			if tb.properties.NoTestExec {
+				ctx.Build(pctx, blueprint.BuildParams{
+					Description: fmt.Sprintf("%s tests to Go binary", name),
+		  		Rule:        goBinTest,
+					Outputs:     []string{testOutputPath},
+					Implicits:   testInputs,
+					Args: map[string]string{
+						"outputPath": testOutputPath,
+						"outputBinPath": testOutputBinPath,
+						"workDir":    ctx.ModuleDir(),
+						"pkg":        tb.properties.TestPkg,
+					},
+				})
+			} else {
+				ctx.Build(pctx, blueprint.BuildParams{
+					Description: fmt.Sprintf("%s tests to Go binary", name),
+					Rule:        goTest,
+					Outputs:     []string{testOutputPath},
+					Implicits:   testInputs,
+					Args: map[string]string{
+						"outputPath": testOutputPath,
+						"outputBinPath": testOutputBinPath,
+						"workDir":    ctx.ModuleDir(),
+						"pkg":        tb.properties.TestPkg,
+					},
+				})
+			}
 		}
 }
 
