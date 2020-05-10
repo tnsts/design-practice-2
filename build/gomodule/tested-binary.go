@@ -24,7 +24,7 @@ var (
 	}, "workDir", "name")
 
 	goTest = pctx.StaticRule("test", blueprint.RuleParams{
-		Command:     "cd ${workDir} && go test -v -o ${outputBinPath} ${pkg} > ${outputPath}",
+		Command:     "cd ${workDir} && mkdir -p ./test-results && go test  -v -o ${outputBinPath} ${pkg} > ${outputPath}",
 		Description: "test ${pkg}",
 	}, "workDir", "outputPath", "outputBinPath", "pkg")
 
@@ -54,7 +54,7 @@ func (tb *testedBinaryModule) GenerateBuildActions(ctx blueprint.ModuleContext) 
 		config.Debug.Printf("Adding build actions for go binary module '%s'", name)
 
 		outputPath := path.Join(config.BaseOutputDir, "bin", name)
-		
+
 		testOutputPath := path.Join(config.BaseOutputDir, "test-results", "test-res.txt")
 		if len(tb.properties.TestsResFile) > 0{
 			testOutputPath = path.Join(config.BaseOutputDir, "test-results", tb.properties.TestsResFile)
