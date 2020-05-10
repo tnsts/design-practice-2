@@ -43,6 +43,7 @@ type testedBinaryModule struct {
 		VendorFirst bool
 		TestSrcs []string
 		TestSrcsExclude []string
+		TestsResFile string
 	}
 }
 
@@ -53,6 +54,9 @@ func (tb *testedBinaryModule) GenerateBuildActions(ctx blueprint.ModuleContext) 
 
 		outputPath := path.Join(config.BaseOutputDir, "bin", name)
 		testOutputPath := path.Join(config.BaseOutputDir, "test-results", "test-res.txt")
+		if len(tb.properties.TestsResFile) > 0{
+			testOutputPath = path.Join(config.BaseOutputDir, "test-results", tb.properties.TestsResFile)
+		}
 
 		var inputs []string
 		inputErors := false
