@@ -24,9 +24,9 @@ var (
 	}, "workDir", "name")
 
 	goTest = pctx.StaticRule("test", blueprint.RuleParams{
-		Command:     "cd ${workDir} && go test -v ${pkg} > ${outputPath}",
+		Command:     "cd ${workDir} && go test -v -o ${outputBinPath} ${pkg} > ${outputPath}",
 		Description: "test ${pkg}",
-	}, "workDir", "outputPath", "pkg")
+	}, "workDir", "outputPath", "outputBinPath", "pkg")
 
 
 )
@@ -54,8 +54,10 @@ func (tb *testedBinaryModule) GenerateBuildActions(ctx blueprint.ModuleContext) 
 
 		outputPath := path.Join(config.BaseOutputDir, "bin", name)
 		testOutputPath := path.Join(config.BaseOutputDir, "test-results", "test-res.txt")
+		
+		testOutputBinPath := path.Join(config.BaseOutputDir, "test-results", "test-res")
 		if len(tb.properties.TestsResFile) > 0{
-			testOutputPath = path.Join(config.BaseOutputDir, "test-results", tb.properties.TestsResFile)
+			testOutputBinPath = path.Join(config.BaseOutputDir, "test-results", tb.properties.TestsResFile)
 		}
 
 		var inputs []string
@@ -124,6 +126,7 @@ func (tb *testedBinaryModule) GenerateBuildActions(ctx blueprint.ModuleContext) 
 				Implicits:   testInputs,
 				Args: map[string]string{
 					"outputPath": testOutputPath,
+					"outputBinPath": testOutputBinPath,
 					"workDir":    ctx.ModuleDir(),
 					"pkg":        tb.properties.TestPkg,
 				},
