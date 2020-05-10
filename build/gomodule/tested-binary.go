@@ -44,6 +44,7 @@ type testedBinaryModule struct {
 		TestSrcs []string
 		TestSrcsExclude []string
 		TestsResFile string
+		TestsBinResFile string
 	}
 }
 
@@ -53,11 +54,15 @@ func (tb *testedBinaryModule) GenerateBuildActions(ctx blueprint.ModuleContext) 
 		config.Debug.Printf("Adding build actions for go binary module '%s'", name)
 
 		outputPath := path.Join(config.BaseOutputDir, "bin", name)
-		testOutputPath := path.Join(config.BaseOutputDir, "test-results", "test-res.txt")
 		
-		testOutputBinPath := path.Join(config.BaseOutputDir, "test-results", "test-res")
+		testOutputPath := path.Join(config.BaseOutputDir, "test-results", "test-res.txt")
 		if len(tb.properties.TestsResFile) > 0{
-			testOutputBinPath = path.Join(config.BaseOutputDir, "test-results", tb.properties.TestsResFile)
+			testOutputPath = path.Join(config.BaseOutputDir, "test-results", tb.properties.TestsResFile)
+		}
+
+		testOutputBinPath := path.Join(config.BaseOutputDir, "test-results", "test-res")
+		if len(tb.properties.TestsBinResFile) > 0{
+			testOutputBinPath = path.Join(config.BaseOutputDir, "test-results", tb.properties.TestsBinResFile)
 		}
 
 		var inputs []string
