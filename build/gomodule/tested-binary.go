@@ -24,12 +24,12 @@ var (
 	}, "workDir", "name")
 
 	goTest = pctx.StaticRule("test", blueprint.RuleParams{
-		Command:     "cd ${workDir} && mkdir -p out/test-results && go test -v -o ${outputBinPath} ${pkg} > ${outputPath}",
+		Command:     "cd ${workDir} && mkdir -p out/test-results && go test -v ${pkg} > ${outputPath}",
 		Description: "test ${pkg}",
-	}, "workDir", "outputPath", "outputBinPath", "pkg")
+	}, "workDir", "outputPath", "pkg")
 
-	goBinTest = pctx.StaticRule("testBinary", blueprint.RuleParams{
-		Command:     "cd ${workDir} && mkdir -p out/test-results && go test -c -v -o ${outputBinPath} ${pkg}",
+	goBenchTest = pctx.StaticRule("testBenchmark", blueprint.RuleParams{
+		Command:     "cd ${workDir} && mkdir -p out/test-results && go test -v ${pkg} > ${outputPath}",
 		Description: "test ${pkg}",
 	}, "workDir", "outputPath", "outputBinPath", "pkg")
 )
@@ -48,12 +48,12 @@ type testedBinaryModule struct {
 		TestSrcsExclude []string
 		TestsResFile string
 		TestsBinResFile string
-		NoTestExec bool
+		TestBenchmark bool
 	}
 }
 
 func (tb *testedBinaryModule) GenerateBuildActions(ctx blueprint.ModuleContext) {
-	name := ctx.ModuleName()
+		name := ctx.ModuleName()
 		config := bood.ExtractConfig(ctx)
 		config.Debug.Printf("Adding build actions for go binary module '%s'", name)
 
@@ -62,11 +62,6 @@ func (tb *testedBinaryModule) GenerateBuildActions(ctx blueprint.ModuleContext) 
 		testOutputPath := path.Join(config.BaseOutputDir, "test-results", "test-res.txt")
 		if len(tb.properties.TestsResFile) > 0{
 			testOutputPath = path.Join(config.BaseOutputDir, "test-results", tb.properties.TestsResFile)
-		}
-
-		testOutputBinPath := path.Join(config.BaseOutputDir, "test-results", "test-res")
-		if len(tb.properties.TestsBinResFile) > 0{
-			testOutputBinPath = path.Join(config.BaseOutputDir, "test-results", tb.properties.TestsBinResFile)
 		}
 
 		var inputs []string
@@ -128,15 +123,14 @@ func (tb *testedBinaryModule) GenerateBuildActions(ctx blueprint.ModuleContext) 
 		}
 
 	  if len(tb.properties.TestPkg) > 0 {
-			if tb.properties.NoTestExec {
+			if tb.properties.TestBenchmark {
 				ctx.Build(pctx, blueprint.BuildParams{
 					Description: fmt.Sprintf("%s tests to Go binary", name),
-		  		Rule:        goBinTest,
+		  		Rule:        goBenchTest,
 					Outputs:     []string{testOutputPath},
 					Implicits:   testInputs,
 					Args: map[string]string{
 						"outputPath": testOutputPath,
-						"outputBinPath": testOutputBinPath,
 						"workDir":    ctx.ModuleDir(),
 						"pkg":        tb.properties.TestPkg,
 					},
@@ -149,7 +143,6 @@ func (tb *testedBinaryModule) GenerateBuildActions(ctx blueprint.ModuleContext) 
 					Implicits:   testInputs,
 					Args: map[string]string{
 						"outputPath": testOutputPath,
-						"outputBinPath": testOutputBinPath,
 						"workDir":    ctx.ModuleDir(),
 						"pkg":        tb.properties.TestPkg,
 					},
