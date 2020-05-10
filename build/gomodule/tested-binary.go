@@ -24,7 +24,7 @@ var (
 	}, "workDir", "name")
 
 	goTest = pctx.StaticRule("test", blueprint.RuleParams{
-		Command:     "cd ${workDir} && mkdir -p out/test-results && ls -la . && ls -la ./out && go test -v -o ${outputBinPath} ${pkg} > ${outputPath}",
+		Command:     "cd ${workDir} && mkdir -p out/test-results && go test -c -v -o ${outputBinPath} ${pkg}",
 		Description: "test ${pkg}",
 	}, "workDir", "outputPath", "outputBinPath", "pkg")
 
