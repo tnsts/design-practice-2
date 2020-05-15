@@ -29,7 +29,7 @@ var (
 	}, "workDir", "outputPath", "pkg")
 
 	goBenchTest = pctx.StaticRule("testBenchmark", blueprint.RuleParams{
-		Command:     "cd ${workDir} && mkdir -p out/test-results && go test -v ${pkg} > ${outputPath}",
+		Command:     "cd ${workDir} && mkdir -p out/test-results && go test -bench=. -v ${pkg} > ${outputPath}",
 		Description: "test ${pkg}",
 	}, "workDir", "outputPath", "outputBinPath", "pkg")
 )
