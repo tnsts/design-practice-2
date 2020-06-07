@@ -6,12 +6,12 @@ go: "1.14"
 
 install:
   - . ./.install-ninja.sh
+  - . ./.install-bood.sh
   - go get -u golang.org/x/tools/cmd/godoc
-  - go get -u github.com/roman-mazur/bood/cmd/bood
 
 script:
   - cd $GOPATH/src/github.com/tnsts/design-practice-2/build
-  - bood
+  - bood-linux
   - rm build.bood
   - mv build.bood_rebase build.bood
   - ./out/bin/bood_rebase
