@@ -17,3 +17,14 @@ go_binary {
 
   srcsExclude: ["vendor/**/*"]
 }
+go_doc {
+ // Module name.
+ name: "doc",
+ binary: ["bood_rebase"],
+
+ // Go package for docs generation.
+ pkg: "/src/github.com/tnsts/design-practice-2/build/gomodule",
+
+ // Build inputs.
+ srcs: ["**/*.go"]
+}
