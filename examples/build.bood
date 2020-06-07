@@ -1,0 +1,30 @@
+go_binary {
+  // Module (and output) name.
+  name: "bood_example",
+
+  // Go package to build.
+  pkg: "github.com/tnsts/design-practice-2/examples/cmd/example",
+
+  testPkg: "github.com/tnsts/design-practice-2/examples",
+
+  // Build inputs.
+  srcs: ["**/*[^test].go", "../go.mod"],
+
+  // Test inputs.
+  testSrcs: ["**/*test.go"],
+
+  vendorFirst: false,
+
+  srcsExclude: ["vendor/**/*"]
+}
+go_doc {
+ // Module name.
+ name: "doc",
+ binary: ["bood_example"],
+
+ // Go package for docs generation.
+ pkg: "/src/github.com/tnsts/design-practice-2/examples",
+
+ // Build inputs.
+ srcs: ["**/*.go"]
+}

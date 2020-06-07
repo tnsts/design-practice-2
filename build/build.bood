@@ -5,26 +5,6 @@ go_binary {
   // Go package to build.
   pkg: "github.com/tnsts/design-practice-2/build/cmd/bood",
 
-  testPkg: "github.com/tnsts/design-practice-2/build/gomodule",
-
   // Build inputs.
   srcs: ["**/*[^test].go", "../go.mod"],
-
-  // Test inputs.
-  testSrcs: ["**/*test.go"],
-
-  vendorFirst: false,
-
-  srcsExclude: ["vendor/**/*"]
-}
-go_doc {
- // Module name.
- name: "doc",
- binary: ["bood_rebase"],
-
- // Go package for docs generation.
- pkg: "/src/github.com/tnsts/design-practice-2/build/gomodule",
-
- // Build inputs.
- srcs: ["**/*.go"]
 }
